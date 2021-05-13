@@ -15,7 +15,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    db.create_all()
+    # db.create_all()
     migrate = Migrate(app, db)
 
 
@@ -57,7 +57,7 @@ class Actor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120),nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.Enum('female', 'male', create_type=False), nullable=False)
+    gender = db.Column(db.Enum('female', 'male', name='gender_enum', create_type=False), nullable=False)
     movies = db.relationship('Casting', back_populates='_actor', cascade="all, delete")
 
     def insert(self):
