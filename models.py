@@ -33,7 +33,6 @@ class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120),nullable=False)
     release_date = db.Column(db.DateTime, nullable=False)
-    actors = db.relationship('Casting', back_populates='_movie', cascade="all, delete")
 
     def insert(self):
         db.session.add(self)
@@ -58,7 +57,6 @@ class Actor(db.Model):
     name = db.Column(db.String(120),nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(ENUM('female', 'male', name='gender_enum', create_type=False), nullable=False)
-    movies = db.relationship('Casting', back_populates='_actor', cascade="all, delete")
 
     def insert(self):
         db.session.add(self)
