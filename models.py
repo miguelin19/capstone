@@ -7,7 +7,7 @@ import re
 
 db=SQLAlchemy()
 
-database_path = os.getenv("DATABASE_URL")  # or other relevant config var
+database_path = os.environ["DATABASE_URL"] 
 if database_path.startswith("postgres://"):
     uri = database_path.replace("postgres://", "postgresql://", 1)
 
