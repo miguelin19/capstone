@@ -1,8 +1,8 @@
 from flask_sqlalchemy import SQLAlchemy
-# from sqlalchemy import Enum
+from sqlalchemy import Enum
 from flask_migrate import Migrate
 import os
-from sqlalchemy.dialects.postgresql import ENUM
+# from sqlalchemy.dialects.postgresql import ENUM
 
 db=SQLAlchemy()
 
@@ -57,7 +57,7 @@ class Actor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120),nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.ENUM(['female', 'male'], name='gender_enum', create_type=False), nullable=False)
+    gender = db.Column(db.Enum(['female', 'male'], name='gender_enum', create_type=False), nullable=False)
     movies = db.relationship('Casting', back_populates='_actor', cascade="all, delete")
 
     def insert(self):
