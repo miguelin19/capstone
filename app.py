@@ -4,13 +4,25 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
 from models import Actor, Movie, setup_db
-from auth import AuthError, requires_auth
+from auth import AuthError, requires_auth, AUTH0_DOMAIN, API_AUDIENCE, AUTH0_CLIENT_ID, AUTH0_CALLBACK_URL
 
 def create_app(test_config=None):
   # create and configure the app
   app = Flask(__name__)
   CORS(app)
   setup_db(app)
+
+  #auxiliary endpoint to get token
+  @app.route("/authorization/url", methods=["GET"])
+  def generate_auth_url():
+    url = f'https://{AUTH0_DOMAIN}/authorize' \
+    f'?audience={API_AUDIENCE}' \
+    f'&response_type=token&client_id=' \
+    f'{AUTH0_CLIENT_ID}&redirect_uri=' \
+    f'{AUTH0_CALLBACK_URL}'
+    return jsonify({
+    'url': url
+    })
 
   # 'GET' endpoints
   @app.route('/movies')

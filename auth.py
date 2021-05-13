@@ -7,6 +7,8 @@ from urllib.request import urlopen
 AUTH0_DOMAIN = 'dev-wf6q6hhs.eu.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'http://127.0.0.1:5000'
+AUTH0_CLIENT_ID = '59ikZ4u56vwZop8jhTDBGkLmOSmwuLKU'
+AUTH0_CALLBACK_URL = 'http://localhost:8080'
 
 ## AuthError Exception
 '''
