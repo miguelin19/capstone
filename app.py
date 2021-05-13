@@ -53,7 +53,7 @@ def create_app(test_config=None):
   
   @app.route('/actors', methods = ['POST'])
   @requires_auth('post:actors')
-  def post_movie(payload):
+  def post_actor(payload):
     data = request.get_json()
     actor_name = data['name']
     actor_age = data['age']
