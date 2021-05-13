@@ -2,11 +2,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Enum
 from flask_migrate import Migrate
 import os
+import re
 # from sqlalchemy.dialects.postgresql import ENUM
 
 db=SQLAlchemy()
 
-database_path = os.environ['DATABASE_URL']
+database_path = os.getenv("DATABASE_URL")  # or other relevant config var
+if database_path.startswith("postgres://"):
+    uri = database_path.replace("postgres://", "postgresql://", 1)
 
 # #setup db
 
