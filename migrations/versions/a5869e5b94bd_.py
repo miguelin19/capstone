@@ -23,7 +23,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=120), nullable=False),
     sa.Column('age', sa.Integer(), nullable=False),
-    sa.Column('gender', postgresql.ENUM('female', 'male', name='gender_enum'), nullable=False),
+    sa.Column('gender', postgresql.ENUM('female', 'male', name='gender_enum', create_type=False), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Movie',
