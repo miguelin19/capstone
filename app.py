@@ -78,8 +78,8 @@ def create_app(test_config=None):
       actors = Actor.query.all()
       return jsonify({
         'success' : True,
-        'movies' : [actor.info() for actor in actors],
-        'total_movies' : len(actors)
+        'actors' : [actor.info() for actor in actors],
+        'total_actors' : len(actors)
       }), 200
 
     except:
