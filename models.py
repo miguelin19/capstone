@@ -1,14 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Enum
 from flask_migrate import Migrate
 import os
-from sqlalchemy.dialects.postgresql import ENUM
 
 db=SQLAlchemy()
 
 database_path = os.environ['DATABASE_URL'].replace('postgres://', 'postgresql://')
 
-# #setup db
+# # #setup db
 
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
@@ -18,7 +16,7 @@ def setup_db(app, database_path=database_path):
     # db.create_all()
     migrate = Migrate(app, db)
 
-
+#Setup function for local database(config in congfig.py)
 # def setup_db(app):
 #     app.config.from_object('config')
 #     db.app = app
