@@ -13,7 +13,7 @@ def create_app(test_config=None):
   setup_db(app)
 
   #auxiliary endpoint to get token
-  @app.route("/authorization/url", methods=["GET"])
+  @app.route('/authorization/url', methods=['GET'])
   def generate_auth_url():
     url = f'https://{AUTH0_DOMAIN}/authorize' \
     f'?audience={API_AUDIENCE}' \
@@ -167,45 +167,46 @@ def create_app(test_config=None):
   @app.errorhandler(400)
   def bad_request(error):
       return jsonify({
-          "success": False, 
-          "error": 400,
-          "message": "Bad request"
+          'success': False, 
+          'error': 400,
+          'message': 'Bad request'
           }), 400
           
   @app.errorhandler(404)
   def not_found(error):
       return jsonify({
-          "success": False, 
-          "error": 404,
-          "message": "Not found"
+          'success': False, 
+          'error': 404,
+          'message': 'Not found'
           }), 404
 
   @app.errorhandler(422)
   def unprocessable(error):
       return jsonify({
-        "success": False, 
-        "error": 422,
-        "message": "unprocessable"
+        'success': False, 
+        'error': 422,
+        'message': 'unprocessable'
         }), 422
 
   @app.errorhandler(405)
   def method_not_allowed(error):
       return jsonify({
-        "success": False, 
-        "error": 405,
-        "message": "method not allowed"
+        'success': False, 
+        'error': 405,
+        'message': 'method not allowed'
         }), 405
 
   @app.errorhandler(500)
   def internal_server_error(error):
       return jsonify({
-        "success": False, 
-        "error": 500,
-        "message": "internal server error"
+        'success': False, 
+        'error': 500,
+        'message': 'internal server error'
         }), 500
 
   return app
 
+#create the app
 app = create_app()
 
 if __name__ == '__main__':
