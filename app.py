@@ -214,6 +214,14 @@ def create_app(test_config=None):
 
   return app
 
+  @app.errorhandler(AuthError)
+  def autherror(error):
+    return jsonify({
+                    "success": False, 
+                    "error": error.status_code,
+                    "message": error.error['code']
+                    }),error.status_code
+
 #create the app
 app = create_app()
 
