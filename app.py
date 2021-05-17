@@ -89,7 +89,7 @@ def create_app(test_config=None):
   @app.route('/movies/<int:id>', methods=['PATCH'])
   @requires_auth('patch:movies')
   def patch_movie(payload,id):
-    data = request.json()
+    data = request.get_json()
     movie = Movie.query.get(id)
     if movie == None:
       abort(404)
