@@ -34,18 +34,37 @@ flask run
 # Roles and permissions:
 
 -Casting Assistant
+
+permissions-
 get:actors|get:movies
 
+login-
+email:celiacarra@gmail.com
+password:Password01!
+
+
 -Casting Director
+
+permissions-
 get:actors|get:movies 
 delete:actors|post:actors
 patch:actors|patch:movies
 
+login-
+email:miguel_carra19@hotmail.com
+password:Password01!
+
 -Executive Producer
+
+permissions-
 get:actors|get:movies 
 delete:actors|post:actors
 delete:movies|post:movies
 patch:actors|patch:movies
+
+login-
+email:xmiguel.carra94@gmail.com
+password:Password01!
 
 #Endpoints
 example movie.info():{
