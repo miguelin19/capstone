@@ -4,24 +4,12 @@ import os
 
 db=SQLAlchemy()
 
-database_path = os.environ['DATABASE_URL'].replace('postgres://', 'postgresql://')
-
-# # #setup db
-
-def setup_db(app, database_path=database_path):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+#Setup function for local database(config in congfig.py)
+def setup_db(app):
+    app.config.from_object('config')
     db.app = app
     db.init_app(app)
-    # db.create_all()
     migrate = Migrate(app, db)
-
-#Setup function for local database(config in congfig.py)
-# def setup_db(app):
-#     app.config.from_object('config')
-#     db.app = app
-#     db.init_app(app)
-#     migrate = Migrate(app, db)
 
 #Models
 #-----------------------------------------------------
