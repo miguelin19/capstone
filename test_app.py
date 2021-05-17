@@ -56,46 +56,46 @@ class CastingAgency(unittest.TestCase):
         res = self.client().get('/movies', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['total_movies'])
-        self.assertTrue(res.data['movies'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['total_movies'])
+        self.assertTrue(data['movies'])
     
     def test_404_get_empty_movies(self):
         res = self.client().get('/movies', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
     
     def test_get_actors(self):
         res = self.client().get('/actors', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['total_actors'])
-        self.assertTrue(res.data['actors'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['total_actors'])
+        self.assertTrue(data['actors'])
     
     def test_404_get_empty_actors(self):
         res = self.client().get('/actors', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
 
     def test_delete_movie(self):
         res = self.client().delete('/movies/1', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         movie = Movie.query.filter(Movie.id==1).one_or_none()
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertEqual(res.data['deleted_movie_id'],1)
+        self.assertEqual(data['success'],True)
+        self.assertEqual(data['deleted_movie_id'],1)
 
     def test_404_delete_non_existing_movie(self):
         res = self.client().delete('/movies/1000', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
     
     def test_delete_actor(self):
         res = self.client().delete('/actors/1', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
@@ -109,38 +109,38 @@ class CastingAgency(unittest.TestCase):
         res = self.client().delete('/actors/1000', headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
 
     def test_post_movie(self):
         res = self.client().post('/movies' ,json=self.new_movie, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['movies'])
-        self.assertTrue(res.data['total_movies'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['movies'])
+        self.assertTrue(data['total_movies'])
     
     def test_post_actor(self):
         res = self.client().post('/actors' ,json=self.new_actor, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['actors'])
-        self.assertTrue(res.data['total_actors'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['actors'])
+        self.assertTrue(data['total_actors'])
     
     def test_422_post_movie(self):
         res = self.client().post('/movies' ,json=self.new_null_movie, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,422)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'unprocessable')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'unprocessable')
     
     def test_422_post_actor(self):
         res = self.client().post('/actors' ,json=self.new_null_actor, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,422)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'unprocessable')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'unprocessable')
     
     def test_patch_movie(self):
         res = self.client().patch('/movies/1', json={
@@ -150,8 +150,8 @@ class CastingAgency(unittest.TestCase):
         data = json.loads(res.data)
         movie = Movie.query.filter(Movie.id==1).one_or_none()
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertEqual(res.data['deleted_movie_id'],1)
+        self.assertEqual(data['success'],True)
+        self.assertEqual(data['deleted_movie_id'],1)
 
     def test_404_patch_non_existing_movie(self):
         res = self.client().patch('/movies/1000', json={
@@ -160,8 +160,8 @@ class CastingAgency(unittest.TestCase):
     }, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
     
     def test_patch_actor(self):
         res = self.client().patch('/actors/1', json = {
@@ -183,17 +183,17 @@ class CastingAgency(unittest.TestCase):
     }, headers={"Authorization": "Bearer {}".format(EXECUTIVE_PRODUCER_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,404)
-        self.assertEqual(res.data['success'],False)
-        self.assertEqual(res.data['message'],'Not found')
+        self.assertEqual(data['success'],False)
+        self.assertEqual(data['message'],'Not found')
 
     """ RBAC Tests """
     def test_get_movies_assistant(self):
         res = self.client().get('/movies', headers={"Authorization": "Bearer {}".format(CAST_ASSISTANT_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['total_movies'])
-        self.assertTrue(res.data['movies'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['total_movies'])
+        self.assertTrue(data['movies'])
     
     def test_401_delete_actor_assistant(self):
         res = self.client().delete('/actors/1', headers={"Authorization": "Bearer {}".format(CAST_ASSISTANT_TOKEN)})
@@ -209,9 +209,9 @@ class CastingAgency(unittest.TestCase):
         res = self.client().post('/actors' ,json=self.new_actor, headers={"Authorization": "Bearer {}".format(CAST_DIRECTOR_TOKEN)})
         data = json.loads(res.data)
         self.assertEqual(res.status_code,200)
-        self.assertEqual(res.data['success'],True)
-        self.assertTrue(res.data['actors'])
-        self.assertTrue(res.data['total_actors'])
+        self.assertEqual(data['success'],True)
+        self.assertTrue(data['actors'])
+        self.assertTrue(data['total_actors'])
     
     def test_401_delete_movie(self):
         res = self.client().delete('/movies/1', headers={"Authorization": "Bearer {}".format(CAST_DIRECTOR_TOKEN)})
