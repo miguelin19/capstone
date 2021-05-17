@@ -200,10 +200,7 @@ class CastingAgency(unittest.TestCase):
         data = json.loads(res.data)
         actor = Actor.query.filter(Actor.id==1).one_or_none()
         self.assertEqual(res.status_code, 401)
-        self.assertEqual(data['message'], {
-            'code': 'unauthorized', 
-            'description':'Permission not found.'
-            })
+        self.assertEqual(data['message'], 'Unauthorized')
 
     def test_post_actor_director(self):
         res = self.client().post('/actors' ,json=self.new_actor, headers={"Authorization": "Bearer {}".format(CAST_DIRECTOR_TOKEN)})
@@ -218,10 +215,7 @@ class CastingAgency(unittest.TestCase):
         data = json.loads(res.data)
         movie = Movie.query.filter(Movie.id==1).one_or_none()
         self.assertEqual(res.status_code, 401)
-        self.assertEqual(data['message'], {
-            'code': 'unauthorized', 
-            'description':'Permission not found.'
-            })
+        self.assertEqual(data['message'], 'Unauthorized')
     
 # Make the tests conveniently executable
 if __name__ == "__main__":
