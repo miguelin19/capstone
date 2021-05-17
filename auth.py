@@ -3,11 +3,12 @@ from flask import request, _request_ctx_stack
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+import os
 
-AUTH0_DOMAIN = 'dev-wf6q6hhs.eu.auth0.com'
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'http://127.0.0.1:5000'
-AUTH0_CLIENT_ID = '59ikZ4u56vwZop8jhTDBGkLmOSmwuLKU'
+AUTH0_CLIENT_ID = os.environ['AUTH0_CLIENT_ID']
 AUTH0_CALLBACK_URL = 'http://localhost:8080'
 
 ## AuthError Exception
